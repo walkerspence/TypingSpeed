@@ -1,4 +1,5 @@
-Tells you how fast you type in words per minute by giving you 60 seconds
-to type as many of the 10,000 most common words in the english language
-as you can
+Gives typing speed in words per minute. Basic gui to show words/correct words. Prints wpm to console.
+
+//to run:
+python3 main.py
 

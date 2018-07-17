@@ -11,6 +11,8 @@ class GameState:
         self.words = self.get_words()
         self.current_row = self.get_row()
         self.next_row = self.get_row()
+        self.total_chars = 0
+        self.wrong_chars = 0
         self.time = 60
         self.correct_words = 0
         self.user_word = ""
@@ -31,7 +33,6 @@ class GameState:
         """
         file = open(self.file)
         words = file.read().split('\n')
-        words = [w for w in words if len(w) > 2]
         file.close()
 
         return words
@@ -57,7 +58,7 @@ class GameState:
 
     def accuracy(self):
         """
-        :return: the number of mistyped letters, typo boolean
+        :return: the number of mistyped letters
         """
         wrong = 0
         i = 0
@@ -72,5 +73,3 @@ class GameState:
         wrong += max(user_word_len, current_word_len) - i - 1
 
         return wrong
-
-

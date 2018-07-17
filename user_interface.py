@@ -3,13 +3,12 @@ import main
 
 
 class Gui:
-    #TODO add timer
     def __init__(self, gamestate):
         self.root = tk.Tk()
         self.gamestate = gamestate
         self.game = None
         self.entry = None
-        self.button = None
+        self.start_timer = None
         self.time = tk.StringVar()
         self.current_word_vars = []
         self.current_word_labels = []
@@ -31,8 +30,8 @@ class Gui:
         self.entry = tk.Entry(self.root)
         self.entry.grid(row=2, columnspan=10)
 
-        self.button = tk.Button(self.root, text="Start timer", command=lambda: self.game.start())
-        self.button.grid(row=3, columnspan=5, sticky="e")
+        self.start_timer = tk.Button(self.root, text="Start timer", command=lambda: self.game.start())
+        self.start_timer.grid(row=3, columnspan=5, sticky="e")
         time = tk.Label(self.root, textvariable=self.time)
         self.time.set("60s")
         
@@ -69,12 +68,18 @@ class Gui:
 
         for i in range(len(row)):
             word_var = tk.StringVar()
-            word_lab = tk.Label(self.root, textvariable=word_var, font="Courier", width=11)
+            word_lab = tk.Label(self.root, textvariable=word_var, font="Courier 18", width=11) # max len of word in list
             word_var.set(row[i])
             word_lab.grid(row=row_num, column=i)
 
             var_list += [word_var]
             lab_list += [word_lab]
+
+    def delete_entry(self):
+        """
+        clears entry box
+        """
+        self.entry.delete(0, tk.END)
 
     def center(self):
         self.root.update_idletasks()
@@ -87,3 +92,10 @@ class Gui:
         y = screen_height / 2 - size[1] / 2
 
         self.root.geometry("%dx%d+%d+%d" % (size + (x, y)))
+
+    @staticmethod
+    def disable_button(button):
+        """
+        disables start timer button
+        """
+        button["state"] = "disabled"
